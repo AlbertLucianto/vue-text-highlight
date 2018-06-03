@@ -44,14 +44,12 @@ export default {
       let text;
 
       if (!defaultSlot) text = '';
-      else {
-        if (defaultSlot[0].tag !== undefined && process.env.NODE_ENV !== 'production') {
-          /* eslint-disable-next-line no-console */
-          console.warn('children of <text-highlight> must be a plain string.');
-          text = '';
-        } else {
-          text = defaultSlot[0].text;
-        }
+      else if (defaultSlot[0].tag !== undefined && process.env.NODE_ENV !== 'production') {
+        /* eslint-disable-next-line no-console */
+        console.warn('children of <text-highlight> must be a plain string.');
+        text = '';
+      } else {
+        text = defaultSlot[0].text;
       }
 
       return highlightChunks(
