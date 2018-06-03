@@ -10,8 +10,8 @@ export default function indicesOf(searchStr, str, caseSensitive = false) {
   let strCpy = str;
   let searchStrCpy = searchStr;
   if (!caseSensitive) {
-    strCpy = str.toLowerCase();
-    searchStrCpy = searchStr.toLowerCase();
+    strCpy = str.toLocaleLowerCase();
+    searchStrCpy = searchStr.toLocaleLowerCase();
   }
 
   let endIndex = 0;

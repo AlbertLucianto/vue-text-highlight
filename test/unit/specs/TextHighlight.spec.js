@@ -63,10 +63,10 @@ describe('<text-higlight>', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  test('should merge highlightStyles', () => {
+  test('should merge highlightStyle', () => {
     const text = 'test text as default slot';
     const queries = ['test'];
-    const highlightStyles = {
+    const highlightStyle = {
       color: 'white',
       'background-color': 'green',
     };
@@ -74,7 +74,7 @@ describe('<text-higlight>', () => {
     const wrapper = mount(TextHighlight, {
       propsData: {
         queries,
-        highlightStyles,
+        highlightStyle,
       },
       slots: {
         default: text,

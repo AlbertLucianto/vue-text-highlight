@@ -8,7 +8,7 @@ export default {
   props: {
     queries: [Array, String],
     caseSensitive: Boolean,
-    highlightStyles: classAndStyleTypes,
+    highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
   },
   /**
