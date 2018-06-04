@@ -30,7 +30,7 @@ export default {
               { text__highlight: highlight.isHighlighted },
               highlight.isHighlighted ? this.highlightClass : '',
             ]}
-            style={highlight.isHighlighted ? this.highlightStyles : ''}
+            style={highlight.isHighlighted ? this.highlightStyle : ''}
             key={idx}
           >
             {highlight.text}
