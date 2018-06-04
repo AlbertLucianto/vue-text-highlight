@@ -9,6 +9,8 @@
 <a href="https://www.npmjs.com/package/vue-text-highlight"><img src="https://img.shields.io/npm/l/vue-text-highlight.svg" alt="License"></a>
 </p>
 
+## [Demo](https://albertlucianto.github.io/vue-text-highlight)
+
 ## Installation
 
 ```bash
@@ -57,15 +59,15 @@ All available props in `TextHighlight` component are:
 
   This prop accepts string or array of strings. If array of strings is given, it will highlight the union of matched strings.
 
-* `caseSensitive: Boolean`
+* `[caseSensitive]: Boolean`
 
   Whether string being searched is case sensitive.
 
-* `highlightStyle: Object|Array|String`
+* `[highlightStyle]: Object|Array|String`
 
   Styles to be applied to highlighted `<span>`. Similar to style bindings in vue, it accepts `Array` syntax, `Object` syntax, or plain styling as `String`. This prop will then be merged with default highlight styles in `TextHighlight` component. [See style binding in Vue.js.](https://vuejs.org/v2/guide/class-and-style#Binding-Inline-Styles)
 
-* `highlightClass: Object|Array|String`
+* `[highlightClass]: Object|Array|String`
 
   Classes to be added to highlighted `<span>`. Similar to class bindings in vue, it accepts `Array` syntax, `Object` syntax, or class as `String`. [See class binding in Vue.js.](https://vuejs.org/v2/guide/class-and-style#Binding-HTML-Classes)
 
