@@ -108,4 +108,24 @@ describe('<text-higlight>', () => {
 
     expect(nodes.length).toEqual(2);
   });
+
+  test('should match correctly using regex', () => {
+    const text = 'test text as default slot';
+    const queries = [/te.t/, 'ault'];
+
+    const wrapper = mount(TextHighlight, {
+      propsData: {
+        queries,
+      },
+      slots: {
+        default: text,
+      },
+    });
+
+    const nodes = wrapper.vm.$el.querySelectorAll('.text__highlight');
+
+    expect(nodes[0].textContent).toEqual('test');
+    expect(nodes[1].textContent).toEqual('text');
+    expect(nodes[2].textContent).toEqual('ault');
+  });
 });

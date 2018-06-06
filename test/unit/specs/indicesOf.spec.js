@@ -5,7 +5,7 @@ describe('indicesOf', () => {
     const text = 'abcd efgh bCde';
     const search = 'bcd';
 
-    const indice = indicesOf(search, text);
+    const indice = indicesOf(text, search);
 
     expect(indice).toEqual([[1, 4], [10, 13]]);
   });
@@ -14,7 +14,7 @@ describe('indicesOf', () => {
     const text = 'abcd efgh bCde';
     const search = 'bcd';
 
-    const indice = indicesOf(search, text, true);
+    const indice = indicesOf(text, search, true);
 
     expect(indice).toEqual([[1, 4]]);
   });
@@ -23,7 +23,7 @@ describe('indicesOf', () => {
     const text = 'ababab';
     const search = 'aba';
 
-    const indice = indicesOf(search, text);
+    const indice = indicesOf(text, search);
 
     expect(indice).toEqual([[0, 3], [2, 5]]);
   });
@@ -32,7 +32,29 @@ describe('indicesOf', () => {
     const text = 'abcd efgh';
     const search = '';
 
-    const indice = indicesOf(search, text);
+    const indice = indicesOf(text, search);
+
+    expect(indice).toEqual([]);
+  });
+
+  it('should work correctly with regex', () => {
+    const text = 'abbc deAbcd abbc';
+    const search = /ab+c/i;
+
+    const indice = indicesOf(text, search);
+
+    expect(indice).toEqual([
+      [0, 4], [12, 16],
+      [7, 10],
+      [0, 4], [12, 16],
+    ]);
+  });
+
+  it('should return empty array when no match with regex', () => {
+    const text = 'abbc deAbcd abbc';
+    const search = /efg/;
+
+    const indice = indicesOf(text, search);
 
     expect(indice).toEqual([]);
   });

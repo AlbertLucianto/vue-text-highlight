@@ -9,10 +9,6 @@ describe('highlightChunks', () => {
 
     expect(chunks).toEqual([
       {
-        isHighlighted: false,
-        text: '',
-      },
-      {
         isHighlighted: true,
         text: 'aBc',
       },
@@ -39,24 +35,12 @@ describe('highlightChunks', () => {
 
     expect(chunks).toEqual([
       {
-        isHighlighted: false,
-        text: '',
-      },
-      {
         isHighlighted: true,
         text: 'aBc',
       },
       {
-        isHighlighted: false,
-        text: '',
-      },
-      {
         isHighlighted: true,
         text: 'Abc',
-      },
-      {
-        isHighlighted: false,
-        text: '',
       },
     ]);
   });
@@ -68,10 +52,6 @@ describe('highlightChunks', () => {
     const chunks = highlightChunks(text, string);
 
     expect(chunks).toEqual([
-      {
-        isHighlighted: false,
-        text: '',
-      },
       {
         isHighlighted: true,
         text: 'aBc',
@@ -101,6 +81,28 @@ describe('highlightChunks', () => {
     const text = 'aBcd';
     const object = { test: 'abc' };
 
-    expect(() => highlightChunks(text, object)).toThrow('either string or array');
+    expect(() => highlightChunks(text, object)).toThrow('queries must be');
+  });
+
+  test('should merge correctly using regex', () => {
+    const text = 'abbcdeAbcd abbc';
+    const queries = [/ab+c/i, 'cdeA'];
+
+    const chunks = highlightChunks(text, queries);
+
+    expect(chunks).toEqual([
+      {
+        isHighlighted: true,
+        text: 'abbcdeAbc',
+      },
+      {
+        isHighlighted: false,
+        text: 'd ',
+      },
+      {
+        isHighlighted: true,
+        text: 'abbc',
+      },
+    ]);
   });
 });
