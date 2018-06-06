@@ -1,17 +1,17 @@
 import { indicesOf, mergeRange } from '../utils';
 
-export default function highlightChunks(text, queriesOrString, caseSensitive = false) {
-  let queries = queriesOrString;
-  if (typeof queriesOrString === 'string') {
-    queries = [queriesOrString];
-  } else if (!Array.isArray(queriesOrString)) {
-    throw new Error('queries must be either string or array of strings.');
+export default function highlightChunks(text, queriesOrQuery, caseSensitive = false) {
+  let queries = queriesOrQuery;
+  if (typeof queriesOrQuery === 'string' || queriesOrQuery instanceof RegExp) {
+    queries = [queriesOrQuery];
+  } else if (!Array.isArray(queriesOrQuery)) {
+    throw new Error('queries must be either string, array of strings or regex.');
   }
 
   const matches = [];
 
   queries.forEach((query) => {
-    matches.push(...indicesOf(query, text, caseSensitive));
+    matches.push(...indicesOf(text, query, caseSensitive));
   });
 
   const highlights = mergeRange(matches);
@@ -20,10 +20,12 @@ export default function highlightChunks(text, queriesOrString, caseSensitive = f
   let lastEnd = 0;
 
   highlights.forEach(([start, end]) => {
-    chunks.push({
-      isHighlighted: false,
-      text: text.slice(lastEnd, start),
-    });
+    if (lastEnd !== start) {
+      chunks.push({
+        isHighlighted: false,
+        text: text.slice(lastEnd, start),
+      });
+    }
     chunks.push({
       isHighlighted: true,
       text: text.slice(start, end),
@@ -32,10 +34,12 @@ export default function highlightChunks(text, queriesOrString, caseSensitive = f
     lastEnd = end;
   });
 
-  chunks.push({
-    isHighlighted: false,
-    text: text.slice(lastEnd),
-  });
+  if (lastEnd !== text.length) {
+    chunks.push({
+      isHighlighted: false,
+      text: text.slice(lastEnd),
+    });
+  }
 
   return chunks;
 }

@@ -6,7 +6,7 @@ const classAndStyleTypes = [Object, Array, String];
 export default {
   name: 'text-highlight',
   props: {
-    queries: [Array, String],
+    queries: [Array, String, RegExp],
     caseSensitive: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
