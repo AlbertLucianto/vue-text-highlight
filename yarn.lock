@@ -1646,6 +1646,12 @@ clone-deep@^2.0.1:
     kind-of "^6.0.0"
     shallow-clone "^1.0.0"
 
+clone-regexp@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/clone-regexp/-/clone-regexp-2.1.0.tgz#d17b9ff55840b2cb2d84eab618bc4f8d2af4b631"
+  dependencies:
+    is-regexp "^2.0.0"
+
 clone@2.x:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.1.tgz#d217d1e961118e3ac9a4b8bba3285553bf647cdb"
@@ -4010,6 +4016,10 @@ is-regex@^1.0.4:
   resolved "https://registry.yarnpkg.com/is-regex/-/is-regex-1.0.4.tgz#5517489b547091b0930e095654ced25ee97e9491"
   dependencies:
     has "^1.0.1"
+
+is-regexp@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/is-regexp/-/is-regexp-2.0.0.tgz#d669511d64a620c7a8dffa9a1e00710f9275ace0"
 
 is-relative@^0.2.1:
   version "0.2.1"
@@ -7673,7 +7683,7 @@ vue-template-es2015-compiler@^1.5.3, vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.2:
+vue@^2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
