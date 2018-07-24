@@ -5,7 +5,11 @@ export default function highlightChunks(text, queriesOrQuery, caseSensitive = fa
   if (typeof queriesOrQuery === 'string' || queriesOrQuery instanceof RegExp) {
     queries = [queriesOrQuery];
   } else if (!Array.isArray(queriesOrQuery)) {
-    throw new Error('queries must be either string, array of strings or regex.');
+    if (process.env.NODE_ENV !== 'production') {
+      throw new Error('queries must be either string, array of strings or regex.');
+    } else {
+      return [];
+    }
   }
 
   const matches = [];
