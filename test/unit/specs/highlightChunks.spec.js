@@ -82,6 +82,13 @@ describe('highlightChunks', () => {
     const object = { test: 'abc' };
 
     expect(() => highlightChunks(text, object)).toThrow('queries must be');
+
+    const currEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'production';
+
+    expect(highlightChunks(text, object)).toEqual([]);
+
+    process.env.NODE_ENV = currEnv;
   });
 
   test('should merge correctly using regex', () => {
