@@ -23,7 +23,7 @@ export default {
       css() {},
     }),
     babel({
-      exclude: 'node_modules/**',
+      exclude: 'node_modules/!(clone-regexp|is-regexp)/**',
       plugins: [
         'external-helpers',
       ],
