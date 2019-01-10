@@ -1,6 +1,6 @@
 {
   "name": "vue-text-highlight",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Text highlighter for Vue.js",
   "author": "Albert Lucianto <albertlucianto@gmail.com>",
   "main": "dist/vue-text-highlight.umd.js",
