@@ -10,6 +10,10 @@ export default {
     caseSensitive: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
+    highlightComponent: {
+      type: [String, Object],
+      default: 'mark',
+    },
   },
   /**
    * Unless `h` is given as parameter, testing (Jest) will yield error:
@@ -24,18 +28,28 @@ export default {
   render(h) {
     return <span>
       {this.highlights
-        .map((highlight, idx) =>
-          <span
-            class={[
-              { text__highlight: highlight.isHighlighted },
-              highlight.isHighlighted ? this.highlightClass : '',
-            ]}
-            style={highlight.isHighlighted ? this.highlightStyle : ''}
-            key={idx}
-          >
-            {highlight.text}
-          </span>,
-        )}
+        .map(({
+          text,
+          isHighlighted,
+          highlightIndex,
+        }) => (
+          !isHighlighted
+            ? text
+            : h(
+              this.highlightComponent,
+              {
+                on: this.$listeners,
+                class: ['text__highlight', this.highlightClass],
+                style: this.highlightStyle,
+                key: highlightIndex,
+                props: {
+                  index: highlightIndex,
+                  text,
+                  ...this.$attrs,
+                },
+              },
+              text,
+            )))}
     </span>;
   },
   computed: {
@@ -62,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .text__highlight {
   background: rgb(255, 204, 0);
   border-radius: 3px;

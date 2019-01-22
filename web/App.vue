@@ -9,15 +9,22 @@
     <div class="card">
       <div class="inputs">
         <input-field
-          @keyup="updateSearch"
+          @input="updateSearch"
           label="Search"
           class="textField"></input-field>
         <check-box
           :defaultValue="split"
           @onchange="updateSplit"
           class="checkBox">Split by space</check-box>
+        <check-box
+          :defaultValue="custom"
+          @onchange="updateCustom"
+          class="checkBox">Custom component</check-box>
       </div>
-      <example-document :search="search" :split="split"></example-document>
+      <example-document
+        :search="search"
+        :split="split"
+        :custom="custom"></example-document>
     </div>
   </div>
 </template>
@@ -42,6 +49,7 @@ export default {
     return {
       search: '',
       split: false,
+      custom: false,
     };
   },
   methods: {
@@ -51,13 +59,16 @@ export default {
     updateSplit(val) {
       this.split = val;
     },
+    updateCustom(val) {
+      this.custom = val;
+    },
   },
 };
 </script>
 
 <style lang="scss">
 body {
-  background-color: #FDFDFD;
+  background-color: #FAFAFA;
   margin: 0;
 }
 #app {
@@ -86,16 +97,18 @@ body {
   .inputs {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
     padding: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     flex-wrap: wrap;
     .checkBox {
-      margin-left: 30px;
+      margin: 0 10px;
     }
     .textField {
       flex-grow: 1;
       padding-bottom: 10px;
+      width: 100%;
     }
   }
 }

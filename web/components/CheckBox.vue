@@ -43,12 +43,13 @@ $green: #42b983;
 .checkBox {
   display: flex;
   align-items: center;
+  cursor: pointer;
   &__box {
     width: 25px;
     height: 25px;
     border-radius: 5px;
     border: 1px solid $green;
-    cursor: pointer;
+    transition: all .1s ease;
     &.active {
       background-color: $green;
     }

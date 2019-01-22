@@ -42,8 +42,10 @@ Vue.component('text-highlight', TextHighlight);
 
 ```javascript
 data() {
-  queries: ['birds', 'scatt'],
-  description: 'Tropical birds scattered as Drake veered the Jeep'
+  return {
+    queries: ['birds', 'scatt'],
+    description: 'Tropical birds scattered as Drake veered the Jeep'
+  };
 }
 ```
 
@@ -65,11 +67,80 @@ All available props in `TextHighlight` component are:
 
 * __`[highlightStyle]:`__ `Object|Array|String`
 
-  Styles to be applied to highlighted `<span>`. Similar to style bindings in vue, it accepts `Array` syntax, `Object` syntax, or plain styling as `String`. This prop will then be merged with default highlight styles in `TextHighlight` component. [See style binding in Vue.js.](https://vuejs.org/v2/guide/class-and-style#Binding-Inline-Styles)
+  Styles to be applied to highlighted `<mark>`. Similar to style bindings in vue, it accepts `Array` syntax, `Object` syntax, or plain styling as `String`. This prop will then be merged with default highlight styles in `TextHighlight` component. [See style binding in Vue.js.](https://vuejs.org/v2/guide/class-and-style#Binding-Inline-Styles)
 
 * __`[highlightClass]:`__ `Object|Array|String`
 
-  Classes to be added to highlighted `<span>`. Similar to class bindings in vue, it accepts `Array` syntax, `Object` syntax, or class as `String`. [See class binding in Vue.js.](https://vuejs.org/v2/guide/class-and-style#Binding-HTML-Classes)
+  Classes to be added to highlighted `<mark>`. Similar to class bindings in vue, it accepts `Array` syntax, `Object` syntax, or class as `String`. [See class binding in Vue.js.](https://vuejs.org/v2/guide/class-and-style#Binding-HTML-Classes)
+
+* __`[highlightComponent]:`__ `Object|String`
+
+  By default vue-text-highlight uses `<mark>` for the highlighting. Pass this props to override with other tag (`string`) or custom component (Vue component definition).
+
+  This component will be passed with two props from `text-highlight`:
+
+  * __`index:`__ `Number`
+
+    Index of highlighted component.
+
+  * __`text:`__ `String`
+
+    Highlighted words, equals to `this.$slots.default[0].text`
+  
+  For more details, see [example below](#advanced-usage).
+
+* Other props and listeners that are not listed above are forwarded to the highlighted component. These props will be merged with highter precendence with `index` and `text` passed from `text-highlight`.
+
+### Advanced Usage
+
+#### OtherComponent.vue
+
+There might be a case where you want to do more things with the highlighted words. For that reason, Vue Text Highlight supports custom component for the highlighted words. In this case, the following example alerts on click.
+
+```js
+import MyClickableComponent from 'MyClickableComponent';
+```
+
+```js
+data() {
+  return {
+    queries: ['birds', 'scatt'],
+    description: 'Tropical birds scattered as Drake veered the Jeep'
+    MyClickableComponent,
+    foo: 'bar',
+  };
+}
+```
+
+```html
+<template>
+  <text-highlight
+    :queries="queries"
+    :highlightComponent="MyClickableComponent"
+    :baz="foo"
+  >
+    {{ description }}
+  </text-highlight>
+</template>
+```
+
+#### MyClickableComponent.vue
+
+```html
+<template>
+  <mark class="custom" @click="alert">
+    <slot></slot>
+  </mark>
+</template>
+```
+
+```js
+props: {
+  baz: String, // From OtherComponent.vue
+  index: Number, // From TextHighlight
+  text: String, // From TextHighlight, equals to `this.$slots.default[0].text`
+}
+```
 
 ## Changelog
 
