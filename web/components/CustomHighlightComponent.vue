@@ -60,6 +60,7 @@ export default {
   .hover-me-tooltip {
     position: absolute;
     white-space: nowrap;
+    bottom: calc(100% + 5px);
     border-radius: 8px;
     transition: all .2s ease;
     box-shadow: 0 5px 15px -5px rgba(black, .4);
@@ -78,7 +79,6 @@ export default {
 
   .tooltip {
     left: 50%;
-    bottom: calc(100% + 5px);
     display: flex;
     align-items: center;
     padding: 2px;
@@ -101,7 +101,6 @@ export default {
 
   .hover-me-tooltip {
     right: calc(50% - 15px);
-    top: 100%;
     padding: 5px 10px;
     pointer-events: none;
     padding-right: 30px;
@@ -109,26 +108,39 @@ export default {
     background-color: #42b983;
     color: white;
     font-weight: 600;
-    animation: hover-me .2s ease forwards;
+    opacity: 0;
+    transform: translateY(5px);
+    animation: hover-me .2s ease forwards .1s;
 
     &::after {
       content: '';
       position: absolute;
-      transform: rotate(-45deg);
+      transform: rotate(135deg);
       right: 10px;
-      top: 12.5px;
+      top: 10px;
       width: 7.5px;
       height: 7.5px;
       border-width: 3px 3px 0 0;
       border-style: solid;
       border-color: white;
+      animation: arrow 1s ease alternate infinite;
     }
   }
 
   @keyframes hover-me {
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes arrow {
     0% {
-      opacity: 0;
-      transform: translateY(5px);
+      transform: translateY(5px) rotate(135deg);
+    }
+
+    100% {
+      transform: rotate(135deg);
     }
   }
 
