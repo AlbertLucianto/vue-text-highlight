@@ -11,6 +11,7 @@ describe('highlightChunks', () => {
       {
         isHighlighted: true,
         text: 'aBc',
+        highlightIndex: 0,
       },
       {
         isHighlighted: false,
@@ -19,6 +20,7 @@ describe('highlightChunks', () => {
       {
         isHighlighted: true,
         text: 'ef',
+        highlightIndex: 1,
       },
       {
         isHighlighted: false,
@@ -37,10 +39,12 @@ describe('highlightChunks', () => {
       {
         isHighlighted: true,
         text: 'aBc',
+        highlightIndex: 0,
       },
       {
         isHighlighted: true,
         text: 'Abc',
+        highlightIndex: 1,
       },
     ]);
   });
@@ -55,6 +59,7 @@ describe('highlightChunks', () => {
       {
         isHighlighted: true,
         text: 'aBc',
+        highlightIndex: 0,
       },
       {
         isHighlighted: false,
@@ -101,6 +106,7 @@ describe('highlightChunks', () => {
       {
         isHighlighted: true,
         text: 'abbcdeAbc',
+        highlightIndex: 0,
       },
       {
         isHighlighted: false,
@@ -109,6 +115,7 @@ describe('highlightChunks', () => {
       {
         isHighlighted: true,
         text: 'abbc',
+        highlightIndex: 1,
       },
     ]);
   });
