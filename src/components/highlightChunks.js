@@ -23,7 +23,7 @@ export default function highlightChunks(text, queriesOrQuery, caseSensitive = fa
   const chunks = [];
   let lastEnd = 0;
 
-  highlights.forEach(([start, end]) => {
+  highlights.forEach(([start, end], index) => {
     if (lastEnd !== start) {
       chunks.push({
         isHighlighted: false,
@@ -33,6 +33,7 @@ export default function highlightChunks(text, queriesOrQuery, caseSensitive = fa
     chunks.push({
       isHighlighted: true,
       text: text.slice(start, end),
+      highlightIndex: index,
     });
 
     lastEnd = end;

@@ -10,6 +10,10 @@ export default {
     caseSensitive: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
+    HighlightComponent: {
+      type: [String, Object],
+      default: 'mark',
+    },
   },
   /**
    * Unless `h` is given as parameter, testing (Jest) will yield error:
@@ -24,17 +28,22 @@ export default {
   render(h) {
     return <span>
       {this.highlights
-        .map((highlight, idx) => (
-          !highlight.isHighlighted
-            ? highlight.text
+        .map(({
+          text,
+          isHighlighted,
+          highlightIndex,
+        }) => (
+          !isHighlighted
+            ? text
             : (
-              <mark
+              <this.HighlightComponent
                 class={['text__highlight', this.highlightClass]}
                 style={this.highlightStyle}
-                key={idx}
+                key={highlightIndex}
+                index={highlightIndex}
               >
-                {highlight.text}
-              </mark>
+                {text}
+              </this.HighlightComponent>
             )))}
     </span>;
   },
