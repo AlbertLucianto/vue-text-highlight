@@ -10,7 +10,7 @@ export default {
     caseSensitive: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
-    HighlightComponent: {
+    highlightComponent: {
       type: [String, Object],
       default: 'mark',
     },
@@ -35,15 +35,20 @@ export default {
         }) => (
           !isHighlighted
             ? text
-            : (
-              <this.HighlightComponent
-                class={['text__highlight', this.highlightClass]}
-                style={this.highlightStyle}
-                key={highlightIndex}
-                index={highlightIndex}
-              >
-                {text}
-              </this.HighlightComponent>
+            : h(
+              this.highlightComponent,
+              {
+                on: this.$listeners,
+                class: ['text__highlight', this.highlightClass],
+                style: this.highlightStyle,
+                key: `${highlightIndex}_${text}`,
+                props: {
+                  index: highlightIndex,
+                  text,
+                  ...this.$attrs,
+                },
+              },
+              text,
             )))}
     </span>;
   },
