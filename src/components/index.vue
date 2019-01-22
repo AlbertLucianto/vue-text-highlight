@@ -24,18 +24,18 @@ export default {
   render(h) {
     return <span>
       {this.highlights
-        .map((highlight, idx) =>
-          <span
-            class={[
-              { text__highlight: highlight.isHighlighted },
-              highlight.isHighlighted ? this.highlightClass : '',
-            ]}
-            style={highlight.isHighlighted ? this.highlightStyle : ''}
-            key={idx}
-          >
-            {highlight.text}
-          </span>,
-        )}
+        .map((highlight, idx) => (
+          !highlight.isHighlighted
+            ? highlight.text
+            : (
+              <mark
+                class={['text__highlight', this.highlightClass]}
+                style={this.highlightStyle}
+                key={idx}
+              >
+                {highlight.text}
+              </mark>
+            )))}
     </span>;
   },
   computed: {
@@ -62,7 +62,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .text__highlight {
   background: rgb(255, 204, 0);
   border-radius: 3px;
