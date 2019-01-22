@@ -4,29 +4,47 @@
       <div class="queries__label">Queries:</div>
       <div class="chips">
         <div
-          v-for="(query, idx) in queries"
-          v-if="query"
-          :key="idx"
+          v-for="(query, index) in filteredQueries"
+          :key="index"
           class="chip">{{ query }}</div>
         </div>
     </div>
     <div class="text">
-      <text-highlight :queries="queries">{{ texts }}</text-highlight>
+      <text-highlight
+        :queries="queries"
+        :highlightComponent="highlightComponent"
+        @enter="setActiveIndex"
+        @leave="unsetActiveIndex"
+        :activeIndex="activeIndex"
+        :displayHoverMe="true"
+      >
+        {{ texts }}
+      </text-highlight>
     </div>
     <div class="html">
-      <text-highlight :queries="queries">{{ html }}</text-highlight>
+      <text-highlight
+        :queries="queries"
+        :highlightComponent="highlightComponent"
+        @enter="setActiveIndex"
+        @leave="unsetActiveIndex"
+        :activeIndex="activeIndex"
+      >
+        {{ html }}
+      </text-highlight>
     </div>
   </div>
 </template>
 
 <script>
 import TextHighlight from 'vue-text-highlight';
+import CustomHighlightComponent from './CustomHighlightComponent';
 import { texts, html } from '../assets/data';
 
 export default {
   props: {
     search: String,
     split: Boolean,
+    custom: Boolean,
   },
   components: {
     TextHighlight,
@@ -35,11 +53,33 @@ export default {
     return {
       texts,
       html,
+      activeIndex: null,
     };
   },
   computed: {
     queries() {
       return this.split ? this.search.split(/\s+/) : [this.search];
+    },
+    filteredQueries() {
+      return this.queries.filter(query => query);
+    },
+    highlightProps() {
+      return {
+        activeIndex: this.activeIndex,
+      };
+    },
+    highlightComponent() {
+      return this.custom
+        ? CustomHighlightComponent
+        : 'mark';
+    },
+  },
+  methods: {
+    setActiveIndex(index) {
+      this.activeIndex = index;
+    },
+    unsetActiveIndex() {
+      this.activeIndex = null;
     },
   },
 };

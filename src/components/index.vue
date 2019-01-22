@@ -41,7 +41,7 @@ export default {
                 on: this.$listeners,
                 class: ['text__highlight', this.highlightClass],
                 style: this.highlightStyle,
-                key: `${highlightIndex}_${text}`,
+                key: highlightIndex,
                 props: {
                   index: highlightIndex,
                   text,
