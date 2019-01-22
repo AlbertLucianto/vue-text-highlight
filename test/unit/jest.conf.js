@@ -22,4 +22,5 @@ module.exports = {
     '!src/main.js',
     '!**/node_modules/**',
   ],
+  testURL: 'http://localhost/',
 };
