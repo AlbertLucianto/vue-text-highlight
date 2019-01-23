@@ -89,13 +89,26 @@ All available props in `TextHighlight` component are:
   
   For more details, see [example below](#advanced-usage).
 
-* Other props and listeners that are not listed above are forwarded to the highlighted component. These props will be merged with highter precendence with `index` and `text` passed from `text-highlight`.
+* Other props and listeners that are not listed above are forwarded to the highlighted component. These props will be merged with higher precendence than `index` and `text` passed from `text-highlight`.
 
 ### Advanced Usage
 
 #### OtherComponent.vue
 
 There might be a case where you want to do more things with the highlighted words. For that reason, Vue Text Highlight supports custom component for the highlighted words. In this case, the following example alerts on click.
+
+```html
+<template>
+  <text-highlight
+    :queries="queries"
+    :highlightComponent="MyClickableComponent"
+    :baz="foo"
+    @customlistener="doSomething"
+  >
+    {{ description }}
+  </text-highlight>
+</template>
+```
 
 ```js
 import MyClickableComponent from 'MyClickableComponent';
@@ -109,26 +122,17 @@ data() {
     MyClickableComponent,
     foo: 'bar',
   };
+},
+methods: {
+  doSomething() {},
 }
-```
-
-```html
-<template>
-  <text-highlight
-    :queries="queries"
-    :highlightComponent="MyClickableComponent"
-    :baz="foo"
-  >
-    {{ description }}
-  </text-highlight>
-</template>
 ```
 
 #### MyClickableComponent.vue
 
 ```html
 <template>
-  <mark class="custom" @click="alert">
+  <mark class="custom" @click="$emit('customlistener')">
     <slot></slot>
   </mark>
 </template>
