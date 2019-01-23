@@ -95,7 +95,7 @@ All available props in `TextHighlight` component are:
 
 #### OtherComponent.vue
 
-There might be a case where you want to do more things with the highlighted words. For that reason, Vue Text Highlight supports custom component for the highlighted words. In this case, the following example alerts on click.
+There might be a case where you want to do more things with the highlighted words. For that reason, vue-text-highlight supports custom component for the highlighted words. In this case, the following example alerts on click.
 
 ```html
 <template>

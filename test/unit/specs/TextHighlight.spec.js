@@ -157,7 +157,7 @@ describe('<text-higlight>', () => {
     const text = 'forward custom component';
     const queries = ['ward', 'comp'];
     const CustomComponent = compileToFunctions(`
-      <button :class="foo" @click="$emit('bar', 'baz')">
+      <button :class="foo" @click="$emit('bar', [index, text])">
         <slot></slot>
       </button>
     `);
@@ -191,6 +191,6 @@ describe('<text-higlight>', () => {
 
     button.trigger('click');
     expect(fn).toHaveBeenCalledTimes(1);
-    expect(fn).toHaveBeenCalledWith('baz');
+    expect(fn).toHaveBeenCalledWith([0, 'ward']);
   });
 });
