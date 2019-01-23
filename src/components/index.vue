@@ -35,21 +35,17 @@ export default {
         }) => (
           !isHighlighted
             ? text
-            : h(
-              this.highlightComponent,
-              {
-                on: this.$listeners,
-                class: ['text__highlight', this.highlightClass],
-                style: this.highlightStyle,
-                key: highlightIndex,
-                props: {
-                  index: highlightIndex,
-                  text,
-                  ...this.$attrs,
-                },
+            : h(this.highlightComponent, {
+              on: this.$listeners,
+              class: ['text__highlight', this.highlightClass],
+              style: this.highlightStyle,
+              key: highlightIndex,
+              props: {
+                index: highlightIndex,
+                text,
+                ...this.$attrs,
               },
-              text,
-            )))}
+            }, text)))}
     </span>;
   },
   computed: {

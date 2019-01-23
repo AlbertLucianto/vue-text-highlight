@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { mount } from '@vue/test-utils';
 import { compileToFunctions } from 'vue-template-compiler';
 import TextHighlight from 'vue-text-highlighter/index';
@@ -127,5 +126,71 @@ describe('<text-higlight>', () => {
     expect(nodes[0].textContent).toEqual('test');
     expect(nodes[1].textContent).toEqual('text');
     expect(nodes[2].textContent).toEqual('ault');
+  });
+
+  test('should render with given custom component', () => {
+    const text = 'using custom component';
+    const queries = 'om';
+    const CustomComponent = compileToFunctions(`
+      <mark class="foo">
+        <slot></slot>
+      </mark>
+    `);
+
+    const wrapper = mount(TextHighlight, {
+      propsData: {
+        queries,
+        highlightComponent: CustomComponent,
+      },
+      slots: {
+        default: text,
+      },
+    });
+
+    const nodes = wrapper.vm.$el.querySelectorAll('.foo');
+
+    expect(nodes[0].textContent).toEqual('om');
+    expect(nodes[1].textContent).toEqual('om');
+  });
+
+  test('should forward non-listed props and listeners to custom component', () => {
+    const text = 'forward custom component';
+    const queries = ['ward', 'comp'];
+    const CustomComponent = compileToFunctions(`
+      <button :class="foo" @click="$emit('bar', 'baz')">
+        <slot></slot>
+      </button>
+    `);
+    CustomComponent.props = {
+      index: Number,
+      text: String,
+      foo: String,
+    };
+
+    const fn = jest.fn();
+
+    const wrapper = mount(TextHighlight, {
+      propsData: {
+        queries,
+        highlightComponent: CustomComponent,
+      },
+      attrs: {
+        foo: 'foofoo',
+      },
+      listeners: {
+        bar: fn,
+      },
+      slots: {
+        default: text,
+      },
+    });
+
+    const button = wrapper.find('button');
+    expect(button.classes().includes('foofoo')).toBe(true);
+    expect(button.text()).toEqual('ward');
+
+    button.trigger('click');
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn).toHaveBeenCalledWith('baz');
   });
 });
