@@ -10,7 +10,7 @@
       <slot />
       <img
         class="social twitter"
-        src="../assets/tweet.svg"
+        src="../assets/twitter.svg"
         @click="alert('tweeted')"
       />
       <img
@@ -61,9 +61,8 @@ export default {
     position: absolute;
     white-space: nowrap;
     bottom: calc(100% + 5px);
-    border-radius: 8px;
+    border-radius: 5px;
     transition: all .2s ease;
-    box-shadow: 0 5px 15px -5px rgba(black, .4);
   }
 
   &:not(:hover) .tooltip,
@@ -86,6 +85,7 @@ export default {
     justify-content: flex-end;
     transform: translate(-50%);
     background-color: white;
+    box-shadow: 0 5px 15px -5px rgba(black, .4);
     border: 1px solid #42b983;
     color: darken(#42b983, 10%);
 
@@ -104,12 +104,13 @@ export default {
     padding: 5px 10px;
     pointer-events: none;
     padding-right: 30px;
-    font-size: 18px;
+    font-size: 22px;
     background-color: #42b983;
     color: white;
     font-weight: 600;
     opacity: 0;
     transform: translateY(5px);
+    box-shadow: 0 3px 20px -3px rgba(black, .5);
     animation: hover-me .2s ease forwards .1s;
 
     &::after {
@@ -145,13 +146,13 @@ export default {
   }
 
   .social {
-    width: 25px;
-    height: 25px;
-    margin: 1px;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
     cursor: pointer;
 
     &.twitter {
-      margin-left: 10px;
+      margin-left: 20px;
     }
   }
 }
