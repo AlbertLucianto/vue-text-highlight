@@ -35,20 +35,26 @@ export default {
         }) => (
           !isHighlighted
             ? text
-            : h(this.highlightComponent, {
-              on: this.$listeners,
-              class: ['text__highlight', this.highlightClass],
-              style: this.highlightStyle,
-              key: highlightIndex,
-              props: {
-                index: highlightIndex,
-                text,
-                ...this.$attrs,
-              },
-            }, text)))}
+            : <this.highlightComponent
+              class={['text__highlight', this.highlightClass]}
+              style={this.highlightStyle}
+              key={highlightIndex}
+              index={highlightIndex}
+              text={text}
+              {...this.attributes}
+            >
+              {text}
+            </this.highlightComponent>
+        ))}
     </span>;
   },
   computed: {
+    attributes() {
+      return {
+        props: this.$attrs,
+        on: this.$listeners,
+      };
+    },
     highlights() {
       const defaultSlot = this.$slots.default;
       let text;
