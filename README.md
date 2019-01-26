@@ -93,9 +93,9 @@ All available props in `TextHighlight` component are:
 
 ### Advanced Usage
 
-#### OtherComponent.vue
-
 There might be a case where you want to do more things with the highlighted words. For that reason, vue-text-highlight supports custom component for the highlighted words. In this case, the following example alerts on click.
+
+#### OtherComponent.vue
 
 ```html
 <template>
@@ -103,7 +103,7 @@ There might be a case where you want to do more things with the highlighted word
     :queries="queries"
     :highlightComponent="MyClickableComponent"
     :baz="foo"
-    @customlistener="doSomething"
+    @customlistener="alert"
   >
     {{ description }}
   </text-highlight>
@@ -124,7 +124,7 @@ data() {
   };
 },
 methods: {
-  doSomething() {},
+  alert() {},
 }
 ```
 
