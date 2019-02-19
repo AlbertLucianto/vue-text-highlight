@@ -1,25 +1,27 @@
 export default function mergeRange([...ranges]) {
+  if (!ranges.length) return [];
+
   ranges.sort((fir, sec) => {
-    if (fir[0] === sec[0]) return fir[1] < sec[1] ? -1 : 1;
-    return fir[0] < sec[0] ? -1 : 1;
+    if (fir[0] !== sec[0]) return fir[0] - sec[0];
+    return fir[1] - sec[1];
   });
 
   const merged = [];
-  let curStart = -1;
-  let curEnd = -1;
+
+  let curStart = ranges[0][0];
+  let curEnd = ranges[0][1];
+
+  ranges.shift();
 
   ranges.forEach(([start, end]) => {
-    if (curEnd <= start) {
-      if (curEnd !== -1) merged.push([curStart, curEnd]);
-
+    if (start >= curEnd) {
+      merged.push([curStart, curEnd]);
       curStart = start;
       curEnd = end;
-    } else {
-      curEnd = Math.max(end, curEnd);
-    }
+    } else if (end > curEnd) curEnd = end;
   });
 
-  if (curEnd !== -1) merged.push([curStart, curEnd]);
+  merged.push([curStart, curEnd]);
 
   return merged;
 }
