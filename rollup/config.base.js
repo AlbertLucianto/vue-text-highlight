@@ -8,7 +8,6 @@ const config = require('../package.json');
 
 export default {
   input: 'src/index.js',
-  name: 'vue-text-highlight',
   plugins: [
     resolve({
       jsnext: true,
@@ -20,7 +19,9 @@ export default {
       include: 'node_modules/**',
     }),
     vue({
-      css() {},
+      template: {
+        isProduction: true,
+      },
     }),
     babel({
       exclude: 'node_modules/!(clone-regexp|is-regexp)/**',
@@ -33,6 +34,7 @@ export default {
       VERSION: JSON.stringify(config.version),
     }),
   ],
+  external: ['vue'],
   watch: {
     include: 'src/**',
   },
