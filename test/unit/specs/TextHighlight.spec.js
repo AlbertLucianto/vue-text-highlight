@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { mount } from '@vue/test-utils';
 import { compileToFunctions } from 'vue-template-compiler';
 import TextHighlight from 'vue-text-highlighter/index';
@@ -192,5 +193,33 @@ describe('<text-higlight>', () => {
     button.trigger('click');
     expect(fn).toHaveBeenCalledTimes(1);
     expect(fn).toHaveBeenCalledWith([0, 'ward']);
+  });
+
+  test('should rerender if slot changes', async (done) => {
+    const text = 'nothing is highlighted';
+    const queries = ['something'];
+
+    const wrapper = mount(TextHighlight, {
+      propsData: {
+        queries,
+      },
+      slots: {
+        default: text,
+      },
+    });
+
+    let nodes = wrapper.vm.$el.querySelectorAll('.text__highlight');
+    expect(nodes).toHaveLength(0);
+
+    wrapper.vm.$slots.default = 'something is highlighted';
+    wrapper.vm.$forceUpdate();
+    Vue.nextTick(() => {
+      nodes = wrapper.vm.$el.querySelectorAll('.text__highlight');
+      expect(nodes).toHaveLength(1);
+
+      done();
+    });
+    wrapper.vm.$forceUpdate();
+    wrapper.vm.$forceUpdate();
   });
 });

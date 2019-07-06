@@ -12,24 +12,39 @@
     <div class="text">
       <text-highlight
         :queries="queries"
-        :highlightComponent="highlightComponent"
         @enter="setActiveIndex"
         @leave="unsetActiveIndex"
         :activeIndex="activeIndex"
         :displayHoverMe="true"
+        :text="texts"
       >
-        {{ texts }}
+        <template v-if="custom" slot-scope="highlightData">
+          <custom-highlight-component
+            @enter="highlightData.on.enter"
+            @leave="highlightData.on.leave"
+            :activeIndex="highlightData.props.activeIndex"
+          >
+            {{ highlightData.props.text }}
+          </custom-highlight-component>
+        </template>
       </text-highlight>
     </div>
     <div class="html">
       <text-highlight
         :queries="queries"
-        :highlightComponent="highlightComponent"
         @enter="setActiveIndex"
         @leave="unsetActiveIndex"
         :activeIndex="activeIndex"
+        :text="html"
       >
-        {{ html }}
+        <template v-if="custom" slot-scope="highlightData">
+          <custom-highlight-component
+            @enter="highlightData.on.enter"
+            @leave="highlightData.on.leave"
+            :activeIndex="highlightData.props.activeIndex"
+            :text="highlightData.props.text"
+          />
+        </template>
       </text-highlight>
     </div>
   </div>
@@ -48,6 +63,7 @@ export default {
   },
   components: {
     TextHighlight,
+    CustomHighlightComponent,
   },
   data() {
     return {
@@ -67,11 +83,6 @@ export default {
       return {
         activeIndex: this.activeIndex,
       };
-    },
-    highlightComponent() {
-      return this.custom
-        ? CustomHighlightComponent
-        : 'mark';
     },
   },
   methods: {

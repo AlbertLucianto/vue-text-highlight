@@ -4,7 +4,9 @@
     <h1>
       <text-highlight
         queries="highlight"
-        highlightClass="titleHighlight">vue text highlight</text-highlight>
+        highlightClass="titleHighlight"
+        text="vue text highlight"
+      />
     </h1>
     <div class="card">
       <div class="inputs">
