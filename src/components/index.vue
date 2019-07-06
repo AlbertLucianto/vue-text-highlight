@@ -15,6 +15,11 @@ export default {
       default: 'mark',
     },
   },
+  data() {
+    return {
+      text: '',
+    };
+  },
   /**
    * Unless `h` is given as parameter, testing (Jest) will yield error:
    *    TypeError: unknown: Duplicate declaration "h"
@@ -48,6 +53,22 @@ export default {
         ))}
     </span>;
   },
+  beforeMount() { this.setTextFromSlot(); },
+  beforeUpdate() { this.setTextFromSlot(); },
+  methods: {
+    setTextFromSlot() {
+      const defaultSlot = this.$slots.default;
+
+      if (!defaultSlot) this.text = '';
+      else if (defaultSlot[0].tag !== undefined && process.env.NODE_ENV !== 'production') {
+        /* eslint-disable-next-line no-console */
+        console.warn('children of <text-highlight> must be a plain string.');
+        this.text = '';
+      } else {
+        this.text = defaultSlot[0].text;
+      }
+    },
+  },
   computed: {
     attributes() {
       return {
@@ -56,20 +77,8 @@ export default {
       };
     },
     highlights() {
-      const defaultSlot = this.$slots.default;
-      let text;
-
-      if (!defaultSlot) text = '';
-      else if (defaultSlot[0].tag !== undefined && process.env.NODE_ENV !== 'production') {
-        /* eslint-disable-next-line no-console */
-        console.warn('children of <text-highlight> must be a plain string.');
-        text = '';
-      } else {
-        text = defaultSlot[0].text;
-      }
-
       return highlightChunks(
-        text,
+        this.text,
         this.queries,
         this.caseSensitive,
       );
