@@ -3,12 +3,15 @@ import cloneRegexp from 'clone-regexp';
 export default function indicesOf(text, searchStringOrRegex, caseSensitive = false) {
   if (searchStringOrRegex instanceof RegExp) {
     const re = cloneRegexp(searchStringOrRegex, { global: true });
-    const matches = text.match(re) || [];
+    const matches = [];
+    const indices = [];
 
-    return matches.reduce((acc, match) => {
-      const indices = indicesOf(text, match, !re.ignoreCase);
-      return [...acc, ...indices];
-    }, []);
+    let match = null;
+    while(match=re.exec(text)) {
+      let offset = match.index + match[0].length;
+      indices.push([match.index, offset]);
+    }
+    return indices;
   }
   const searchStringLen = searchStringOrRegex.length;
 
