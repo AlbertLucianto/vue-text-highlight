@@ -3,11 +3,10 @@ import cloneRegexp from 'clone-regexp';
 export default function indicesOf(text, searchStringOrRegex, caseSensitive = false) {
   if (searchStringOrRegex instanceof RegExp) {
     const re = cloneRegexp(searchStringOrRegex, { global: true });
-    const matches = [];
     const indices = [];
 
     let match = null;
-    while(match=re.exec(text)) {
+    while (match = re.exec(text)) {
       let offset = match.index + match[0].length;
       indices.push([match.index, offset]);
     }
