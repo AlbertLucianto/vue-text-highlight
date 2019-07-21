@@ -44,7 +44,7 @@ describe('indicesOf', () => {
     const indice = indicesOf(text, search);
 
     expect(indice).toEqual([
-      [0, 4], [7, 10], [12, 16]
+      [0, 4], [7, 10], [12, 16],
     ]);
   });
 

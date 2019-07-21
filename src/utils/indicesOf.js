@@ -5,10 +5,11 @@ export default function indicesOf(text, searchStringOrRegex, caseSensitive = fal
     const re = cloneRegexp(searchStringOrRegex, { global: true });
     const indices = [];
 
-    let match = null;
-    while (match = re.exec(text)) {
-      let offset = match.index + match[0].length;
+    let match = re.exec(text);
+    while (match) {
+      const offset = match.index + match[0].length;
       indices.push([match.index, offset]);
+      match = re.exec(text);
     }
     return indices;
   }
