@@ -64,6 +64,10 @@ All available props in `TextHighlight` component are:
 * __`[caseSensitive]:`__ `Boolean`
 
   Whether string being searched is case sensitive.
+  
+* __`[diacriticsSensitive]:`__ `Boolean`
+  
+  Whether string being searched is diacritics sensitive.
 
 * __`[highlightStyle]:`__ `Object|Array|String`
 

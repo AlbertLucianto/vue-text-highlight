@@ -1,6 +1,7 @@
 import { indicesOf, mergeRange } from '../utils';
 
-export default function highlightChunks(text, queriesOrQuery, caseSensitive = false) {
+export default function highlightChunks(
+  text, queriesOrQuery, caseSensitive = false, diacriticsSensitive = false) {
   let queries = queriesOrQuery;
   if (typeof queriesOrQuery === 'string' || queriesOrQuery instanceof RegExp) {
     queries = [queriesOrQuery];
@@ -15,7 +16,7 @@ export default function highlightChunks(text, queriesOrQuery, caseSensitive = fa
   const matches = [];
 
   queries.forEach((query) => {
-    matches.push(...indicesOf(text, query, caseSensitive));
+    matches.push(...indicesOf(text, query, caseSensitive, diacriticsSensitive));
   });
 
   const highlights = mergeRange(matches);

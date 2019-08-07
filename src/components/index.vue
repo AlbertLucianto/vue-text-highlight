@@ -8,6 +8,7 @@ export default {
   props: {
     queries: [Array, String, RegExp],
     caseSensitive: Boolean,
+    diacriticsSensitive: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
     highlightComponent: {
@@ -81,6 +82,7 @@ export default {
         this.text,
         this.queries,
         this.caseSensitive,
+        this.diacriticsSensitive,
       );
     },
   },
