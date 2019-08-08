@@ -12,19 +12,41 @@
           @input="updateSearch"
           label="Search"
           class="textField"></input-field>
-        <check-box
-          :defaultValue="split"
-          @onchange="updateSplit"
-          class="checkBox">Split by space</check-box>
-        <check-box
-          :defaultValue="custom"
-          @onchange="updateCustom"
-          class="checkBox">Custom component</check-box>
+        <div class="row">
+          <div class="column">
+            <check-box
+              :defaultValue="split"
+              @onchange="updateSplit"
+              class="checkBox">Split by space</check-box>
+          </div>
+          <div class="column">
+            <check-box
+              :defaultValue="custom"
+              @onchange="updateCustom"
+              class="checkBox">Custom component</check-box>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <check-box
+              :defaultValue="caseSensitive"
+              @onchange="updateCaseSensitive"
+              class="checkBox">Case sensitive</check-box>
+          </div>
+          <div class="column">
+            <check-box
+              :defaultValue="diacriticsSensitive"
+              @onchange="updateDiacriticsSensitive"
+              class="checkBox">Diacritics sensitive</check-box>
+          </div>
+        </div>
       </div>
       <example-document
         :search="search"
         :split="split"
-        :custom="custom"></example-document>
+        :custom="custom"
+        :caseSensitive="caseSensitive"
+        :diacriticsSensitive="diacriticsSensitive"></example-document>
     </div>
   </div>
 </template>
@@ -50,6 +72,8 @@ export default {
       search: '',
       split: false,
       custom: false,
+      caseSensitive: false,
+      diacriticsSensitive: false,
     };
   },
   methods: {
@@ -61,6 +85,12 @@ export default {
     },
     updateCustom(val) {
       this.custom = val;
+    },
+    updateCaseSensitive(val) {
+      this.caseSensitive = val;
+    },
+    updateDiacriticsSensitive(val) {
+      this.diacriticsSensitive = val;
     },
   },
 };
@@ -77,7 +107,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: calc(10vh + 5%);
+  margin-top: calc(5vh + 5%);
   .titleHighlight {
     background-color: #42b983;
     color: #FFFFFFF0;
@@ -95,20 +125,26 @@ body {
     box-shadow: 0 20px 50px rgba(0,0,0,.1);
   }
   .inputs {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 20px;
     padding: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
-    flex-wrap: wrap;
-    .checkBox {
-      margin: 0 10px;
-    }
     .textField {
       flex-grow: 1;
       padding-bottom: 10px;
       width: 100%;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-bottom: 5px;
+      width: 100%;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 50%;
     }
   }
 }
