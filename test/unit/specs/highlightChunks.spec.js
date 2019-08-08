@@ -82,6 +82,20 @@ describe('highlightChunks', () => {
     ]);
   });
 
+  test('should match diacritics sensitive', () => {
+    const text = 'aBocd';
+    const string = 'abóc';
+
+    const chunks = highlightChunks(text, string, false, true);
+
+    expect(chunks).toEqual([
+      {
+        isHighlighted: false,
+        text: 'aBocd',
+      },
+    ]);
+  });
+
   test('should accept string as queries', () => {
     const text = 'aBcd';
     const object = { test: 'abc' };

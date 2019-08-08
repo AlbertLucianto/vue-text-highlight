@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions
 import { indicesOf } from 'vue-text-highlighter/utils';
 
 describe('indicesOf', () => {
@@ -10,13 +11,28 @@ describe('indicesOf', () => {
     expect(indice).toEqual([[1, 4], [10, 13]]);
   });
 
-  it('should return two indices with case sensitive on', () => {
+  it('should return two indices with diacritics sensitive off', () => {
+    const text = 'efgit pqrs fgít';
+    const search = 'fgít';
+
+    const indice = indicesOf(text, search);
+    expect(indice).toEqual([[1, 5], [11, 15]]);
+  });
+
+  it('should return one indice with case sensitive on', () => {
     const text = 'abcd efgh bCde';
     const search = 'bcd';
 
     const indice = indicesOf(text, search, true);
-
     expect(indice).toEqual([[1, 4]]);
+  });
+
+  it('should return one indice with diacritics sensitive on', () => {
+    const text = 'efgit pqrs fgít';
+    const search = 'fgít';
+
+    const indice = indicesOf(text, search, false, true);
+    expect(indice).toEqual([[11, 15]]);
   });
 
   it('should also return overlappings matches', () => {
