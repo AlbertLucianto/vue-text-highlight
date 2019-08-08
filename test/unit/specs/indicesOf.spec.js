@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
 import { indicesOf } from 'vue-text-highlighter/utils';
 
 describe('indicesOf', () => {
