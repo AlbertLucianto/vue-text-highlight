@@ -22,7 +22,7 @@ describe('indicesOf', () => {
     const text = 'abcd efgh bCde';
     const search = 'bcd';
 
-    const indice = indicesOf(text, search, true);
+    const indice = indicesOf(text, search, { caseSensitive: true });
     expect(indice).toEqual([[1, 4]]);
   });
 
@@ -30,7 +30,7 @@ describe('indicesOf', () => {
     const text = 'efgit pqrs fgít';
     const search = 'fgít';
 
-    const indice = indicesOf(text, search, false, true);
+    const indice = indicesOf(text, search, { caseSensitive: false, diacriticsSensitive: true });
     expect(indice).toEqual([[11, 15]]);
   });
 

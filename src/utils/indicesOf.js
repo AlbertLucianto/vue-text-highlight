@@ -2,7 +2,10 @@ import cloneRegexp from 'clone-regexp';
 import diacritics from 'diacritics';
 
 export default function indicesOf(
-  text, searchStringOrRegex, caseSensitive = false, diacriticsSensitive = false) {
+  text,
+  searchStringOrRegex,
+  { caseSensitive = false, diacriticsSensitive = false } = {},
+) {
   if (searchStringOrRegex instanceof RegExp) {
     const re = cloneRegexp(searchStringOrRegex, { global: true });
     const indices = [];

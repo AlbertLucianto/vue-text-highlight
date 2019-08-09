@@ -72,7 +72,7 @@ describe('highlightChunks', () => {
     const text = 'aBcd';
     const string = 'abc';
 
-    const chunks = highlightChunks(text, string, true);
+    const chunks = highlightChunks(text, string, { caseSensitive: true });
 
     expect(chunks).toEqual([
       {
@@ -86,7 +86,10 @@ describe('highlightChunks', () => {
     const text = 'aBocd';
     const string = 'abóc';
 
-    const chunks = highlightChunks(text, string, false, true);
+    const chunks = highlightChunks(text, string, {
+      caseSensitive: false,
+      diacriticsSensitive: true,
+    });
 
     expect(chunks).toEqual([
       {
@@ -100,7 +103,10 @@ describe('highlightChunks', () => {
     const text = 'aBocd';
     const string = 'abóc';
 
-    const chunks = highlightChunks(text, string, false, false);
+    const chunks = highlightChunks(text, string, {
+      caseSensitive: false,
+      diacriticsSensitive: false,
+    });
 
     expect(chunks).toEqual([
       {

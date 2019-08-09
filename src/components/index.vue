@@ -78,12 +78,13 @@ export default {
       };
     },
     highlights() {
-      return highlightChunks(
-        this.text,
-        this.queries,
-        this.caseSensitive,
-        this.diacriticsSensitive,
-      );
+      const {
+        text,
+        queries,
+        caseSensitive,
+        diacriticsSensitive,
+      } = this;
+      return highlightChunks(text, queries, { caseSensitive, diacriticsSensitive });
     },
   },
 };
