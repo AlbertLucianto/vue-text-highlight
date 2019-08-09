@@ -72,12 +72,51 @@ describe('highlightChunks', () => {
     const text = 'aBcd';
     const string = 'abc';
 
-    const chunks = highlightChunks(text, string, true);
+    const chunks = highlightChunks(text, string, { caseSensitive: true });
 
     expect(chunks).toEqual([
       {
         isHighlighted: false,
         text: 'aBcd',
+      },
+    ]);
+  });
+
+  test('should match diacritics sensitive', () => {
+    const text = 'aBocd';
+    const string = 'abóc';
+
+    const chunks = highlightChunks(text, string, {
+      caseSensitive: false,
+      diacriticsSensitive: true,
+    });
+
+    expect(chunks).toEqual([
+      {
+        isHighlighted: false,
+        text: 'aBocd',
+      },
+    ]);
+  });
+
+  test('should match diacritics insensitive', () => {
+    const text = 'aBocd';
+    const string = 'abóc';
+
+    const chunks = highlightChunks(text, string, {
+      caseSensitive: false,
+      diacriticsSensitive: false,
+    });
+
+    expect(chunks).toEqual([
+      {
+        isHighlighted: true,
+        text: 'aBoc',
+        highlightIndex: 0,
+      },
+      {
+        isHighlighted: false,
+        text: 'd',
       },
     ]);
   });

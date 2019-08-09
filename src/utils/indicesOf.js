@@ -1,6 +1,11 @@
 import cloneRegexp from 'clone-regexp';
+import diacritics from 'diacritics';
 
-export default function indicesOf(text, searchStringOrRegex, caseSensitive = false) {
+export default function indicesOf(
+  text,
+  searchStringOrRegex,
+  { caseSensitive = false, diacriticsSensitive = false } = {},
+) {
   if (searchStringOrRegex instanceof RegExp) {
     const re = cloneRegexp(searchStringOrRegex, { global: true });
     const indices = [];
@@ -26,6 +31,11 @@ export default function indicesOf(text, searchStringOrRegex, caseSensitive = fal
   if (!caseSensitive) {
     strCpy = text.toLocaleLowerCase();
     searchStringCpy = searchStringOrRegex.toLocaleLowerCase();
+  }
+
+  if (!diacriticsSensitive) {
+    strCpy = diacritics.remove(strCpy);
+    searchStringCpy = diacritics.remove(searchStringCpy);
   }
 
   let startIndex = 0;

@@ -17,8 +17,24 @@
         @leave="unsetActiveIndex"
         :activeIndex="activeIndex"
         :displayHoverMe="true"
+        :caseSensitive="caseSensitive"
+        :diacriticsSensitive="diacriticsSensitive"
       >
-        {{ texts }}
+        {{ textEnglish }}
+      </text-highlight>
+    </div>
+    <div class="text">
+      <text-highlight
+        :queries="queries"
+        :highlightComponent="highlightComponent"
+        @enter="setActiveIndex"
+        @leave="unsetActiveIndex"
+        :activeIndex="activeIndex"
+        :displayHoverMe="true"
+        :caseSensitive="caseSensitive"
+        :diacriticsSensitive="diacriticsSensitive"
+      >
+        {{ textSpanish }}
       </text-highlight>
     </div>
     <div class="html">
@@ -28,6 +44,8 @@
         @enter="setActiveIndex"
         @leave="unsetActiveIndex"
         :activeIndex="activeIndex"
+        :caseSensitive="caseSensitive"
+        :diacriticsSensitive="diacriticsSensitive"
       >
         {{ html }}
       </text-highlight>
@@ -45,13 +63,16 @@ export default {
     search: String,
     split: Boolean,
     custom: Boolean,
+    caseSensitive: Boolean,
+    diacriticsSensitive: Boolean,
   },
   components: {
     TextHighlight,
   },
   data() {
     return {
-      texts,
+      textEnglish: texts.english,
+      textSpanish: texts.spanish,
       html,
       activeIndex: null,
     };
@@ -111,6 +132,7 @@ export default {
   }
   .text {
     padding: 10px;
+    font-size: 14px;
   }
   .html {
     padding: 10px;

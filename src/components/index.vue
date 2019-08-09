@@ -8,6 +8,7 @@ export default {
   props: {
     queries: [Array, String, RegExp],
     caseSensitive: Boolean,
+    diacriticsSensitive: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
     highlightComponent: {
@@ -77,11 +78,13 @@ export default {
       };
     },
     highlights() {
-      return highlightChunks(
-        this.text,
-        this.queries,
-        this.caseSensitive,
-      );
+      const {
+        text,
+        queries,
+        caseSensitive,
+        diacriticsSensitive,
+      } = this;
+      return highlightChunks(text, queries, { caseSensitive, diacriticsSensitive });
     },
   },
 };

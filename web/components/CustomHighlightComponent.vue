@@ -104,7 +104,7 @@ export default {
     padding: 5px 10px;
     pointer-events: none;
     padding-right: 30px;
-    font-size: 22px;
+    font-size: 18px;
     background-color: #42b983;
     color: white;
     font-weight: 600;
