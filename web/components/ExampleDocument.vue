@@ -132,6 +132,7 @@ export default {
   }
   .text {
     padding: 10px;
+    font-size: 14px;
   }
   .html {
     padding: 10px;

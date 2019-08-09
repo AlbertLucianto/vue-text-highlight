@@ -67,7 +67,7 @@ $green: #42b983;
   &__label {
     padding-left: 20px;
     padding-top: 3px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: $green;
     opacity: .5;

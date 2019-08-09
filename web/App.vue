@@ -107,7 +107,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: calc(5vh + 5%);
+  margin-top: 5%;
   .titleHighlight {
     background-color: #42b983;
     color: #FFFFFFF0;
