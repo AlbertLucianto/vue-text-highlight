@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.9
+
+### Supports diacritics sensitive
+
+* __`[diacriticsSensitive]:`__ `Boolean`
+  
+  Whether string being searched is diacritics sensitive.
+
 ## 2.0.0
 
 ### Supports Custom Component
