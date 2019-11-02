@@ -10,8 +10,6 @@ export default {
   input: 'src/index.js',
   plugins: [
     resolve({
-      jsnext: true,
-      main: true,
       browser: true,
       extensions: ['.vue', '.js', '.jsx', '.json'],
     }),
