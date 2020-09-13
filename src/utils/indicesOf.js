@@ -1,10 +1,16 @@
 import cloneRegexp from 'clone-regexp';
 import diacritics from 'diacritics';
 
+
+const isDigit = char => /^\d+$/.test(char);
+const isLetter = char => char.toUpperCase() !== char.toLowerCase() || char.codePointAt(0) > 127;
+const isLetterOrDigit = char => isLetter(char) || isDigit(char);
+
+
 export default function indicesOf(
   text,
   searchStringOrRegex,
-  { caseSensitive = false, diacriticsSensitive = false } = {},
+  { caseSensitive = false, diacriticsSensitive = false, wholeWordMatch = false } = {},
 ) {
   if (searchStringOrRegex instanceof RegExp) {
     const re = cloneRegexp(searchStringOrRegex, { global: true });
@@ -45,6 +51,19 @@ export default function indicesOf(
     indices.push([index, startIndex]);
 
     index = strCpy.indexOf(searchStringCpy, index + 1);
+  }
+
+  if (wholeWordMatch) {
+    const strLength = strCpy.length;
+    return indices.filter((range) => {
+      const [start, end] = range;
+      const idxBefore = start - 1;
+      const idxAfter = end;
+      const idxBeforeIsLetterOrDigit = idxBefore > 0 && isLetterOrDigit(strCpy[idxBefore]);
+      const idxAfterIsLetterOrDigit = idxAfter < strLength && isLetterOrDigit(strCpy[idxAfter]);
+      debugger;
+      return !(idxAfterIsLetterOrDigit || idxBeforeIsLetterOrDigit);
+    });
   }
 
   return indices;

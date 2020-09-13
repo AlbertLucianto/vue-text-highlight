@@ -158,4 +158,23 @@ describe('highlightChunks', () => {
       },
     ]);
   });
+  test('should match whole word not part of other word', () => {
+    const text = 'example amp';
+    const string = 'amp';
+
+    const chunks = highlightChunks(text, string, { wholeWordMatch: true });
+    console.log(chunks);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: 'example ',
+        },
+        {
+          isHighlighted: true,
+          text: 'amp',
+          highlightIndex: 0,
+        },
+      ]);
+  });
 });

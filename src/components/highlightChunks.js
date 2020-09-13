@@ -3,7 +3,7 @@ import { indicesOf, mergeRange } from '../utils';
 export default function highlightChunks(
   text,
   queriesOrQuery,
-  { caseSensitive = false, diacriticsSensitive = false } = {},
+  { caseSensitive = false, diacriticsSensitive = false, wholeWordMatch = false } = {},
 ) {
   let queries = queriesOrQuery;
   if (typeof queriesOrQuery === 'string' || queriesOrQuery instanceof RegExp) {
@@ -19,7 +19,7 @@ export default function highlightChunks(
   const matches = [];
 
   queries.forEach((query) => {
-    matches.push(...indicesOf(text, query, { caseSensitive, diacriticsSensitive }));
+    matches.push(...indicesOf(text, query, { caseSensitive, diacriticsSensitive, wholeWordMatch }));
   });
 
   const highlights = mergeRange(matches);

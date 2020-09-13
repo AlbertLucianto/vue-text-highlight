@@ -19,6 +19,7 @@
         :displayHoverMe="true"
         :caseSensitive="caseSensitive"
         :diacriticsSensitive="diacriticsSensitive"
+        :wholeWordMatch="wholeWordMatch"
       >
         {{ textEnglish }}
       </text-highlight>
@@ -33,6 +34,7 @@
         :displayHoverMe="true"
         :caseSensitive="caseSensitive"
         :diacriticsSensitive="diacriticsSensitive"
+        :wholeWordMatch="wholeWordMatch"
       >
         {{ textSpanish }}
       </text-highlight>
@@ -46,6 +48,7 @@
         :activeIndex="activeIndex"
         :caseSensitive="caseSensitive"
         :diacriticsSensitive="diacriticsSensitive"
+        :wholeWordMatch="wholeWordMatch"
       >
         {{ html }}
       </text-highlight>
@@ -65,6 +68,7 @@ export default {
     custom: Boolean,
     caseSensitive: Boolean,
     diacriticsSensitive: Boolean,
+    wholeWordMatch: Boolean,
   },
   components: {
     TextHighlight,
