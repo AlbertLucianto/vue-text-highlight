@@ -61,7 +61,6 @@ export default function indicesOf(
       const idxAfter = end;
       const idxBeforeIsLetterOrDigit = idxBefore > 0 && isLetterOrDigit(strCpy[idxBefore]);
       const idxAfterIsLetterOrDigit = idxAfter < strLength && isLetterOrDigit(strCpy[idxAfter]);
-      debugger;
       return !(idxAfterIsLetterOrDigit || idxBeforeIsLetterOrDigit);
     });
   }
