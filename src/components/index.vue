@@ -9,6 +9,7 @@ export default {
     queries: [Array, String, RegExp],
     caseSensitive: Boolean,
     diacriticsSensitive: Boolean,
+    wholeWordMatch: Boolean,
     highlightStyle: classAndStyleTypes,
     highlightClass: classAndStyleTypes,
     highlightComponent: {
@@ -83,8 +84,9 @@ export default {
         queries,
         caseSensitive,
         diacriticsSensitive,
+        wholeWordMatch,
       } = this;
-      return highlightChunks(text, queries, { caseSensitive, diacriticsSensitive });
+      return highlightChunks(text, queries, { caseSensitive, diacriticsSensitive, wholeWordMatch });
     },
   },
 };

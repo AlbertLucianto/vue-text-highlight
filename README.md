@@ -64,10 +64,15 @@ All available props in `TextHighlight` component are:
 * __`[caseSensitive]:`__ `Boolean`
 
   Whether string being searched is case sensitive.
-  
+
 * __`[diacriticsSensitive]:`__ `Boolean`
-  
+
   Whether string being searched is diacritics sensitive.
+
+* __`[wholeWordMatch]:`__ `Boolean`
+
+  Whether string being searched as a whole word .
+
 
 * __`[highlightStyle]:`__ `Object|Array|String`
 
@@ -90,7 +95,7 @@ All available props in `TextHighlight` component are:
   * __`text:`__ `String`
 
     Highlighted words, equals to `this.$slots.default[0].text`
-  
+
   For more details, see [example below](#advanced-usage).
 
 * Other props and listeners that are not listed above are forwarded to the highlighted component. These props will be merged with higher precendence than `index` and `text` passed from `text-highlight`.
