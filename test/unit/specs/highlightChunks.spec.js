@@ -158,12 +158,11 @@ describe('highlightChunks', () => {
       },
     ]);
   });
+
   test('should match whole word not part of other word', () => {
     const text = 'example amp';
     const string = 'amp';
-
     const chunks = highlightChunks(text, string, { wholeWordMatch: true });
-    console.log(chunks);
     expect(chunks)
       .toEqual([
         {
@@ -173,6 +172,42 @@ describe('highlightChunks', () => {
         {
           isHighlighted: true,
           text: 'amp',
+          highlightIndex: 0,
+        },
+      ]);
+  });
+
+  test('should match whole word not part of other word or digit', () => {
+    const text = 'corona2012 corona';
+    const string = 'corona';
+    const chunks = highlightChunks(text, string, { wholeWordMatch: true });
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: 'corona2012 ',
+        },
+        {
+          isHighlighted: true,
+          text: 'corona',
+          highlightIndex: 0,
+        },
+      ]);
+  });
+
+  test('should match whole number not part of other number', () => {
+    const text = '2012 01';
+    const string = '01';
+    const chunks = highlightChunks(text, string, { wholeWordMatch: true });
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: '2012 ',
+        },
+        {
+          isHighlighted: true,
+          text: '01',
           highlightIndex: 0,
         },
       ]);
