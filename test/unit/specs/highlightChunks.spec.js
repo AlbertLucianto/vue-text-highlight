@@ -7,26 +7,27 @@ describe('highlightChunks', () => {
 
     const chunks = highlightChunks(text, queries);
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: true,
-        text: 'aBc',
-        highlightIndex: 0,
-      },
-      {
-        isHighlighted: false,
-        text: 'd ',
-      },
-      {
-        isHighlighted: true,
-        text: 'ef',
-        highlightIndex: 1,
-      },
-      {
-        isHighlighted: false,
-        text: 'g',
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: true,
+          text: 'aBc',
+          highlightIndex: 0,
+        },
+        {
+          isHighlighted: false,
+          text: 'd ',
+        },
+        {
+          isHighlighted: true,
+          text: 'ef',
+          highlightIndex: 1,
+        },
+        {
+          isHighlighted: false,
+          text: 'g',
+        },
+      ]);
   });
 
   test('should not merge adjacent', () => {
@@ -35,18 +36,19 @@ describe('highlightChunks', () => {
 
     const chunks = highlightChunks(text, queries);
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: true,
-        text: 'aBc',
-        highlightIndex: 0,
-      },
-      {
-        isHighlighted: true,
-        text: 'Abc',
-        highlightIndex: 1,
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: true,
+          text: 'aBc',
+          highlightIndex: 0,
+        },
+        {
+          isHighlighted: true,
+          text: 'Abc',
+          highlightIndex: 1,
+        },
+      ]);
   });
 
   test('should accept string as queries', () => {
@@ -55,17 +57,18 @@ describe('highlightChunks', () => {
 
     const chunks = highlightChunks(text, string);
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: true,
-        text: 'aBc',
-        highlightIndex: 0,
-      },
-      {
-        isHighlighted: false,
-        text: 'd',
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: true,
+          text: 'aBc',
+          highlightIndex: 0,
+        },
+        {
+          isHighlighted: false,
+          text: 'd',
+        },
+      ]);
   });
 
   test('should match case sensitive', () => {
@@ -74,12 +77,13 @@ describe('highlightChunks', () => {
 
     const chunks = highlightChunks(text, string, { caseSensitive: true });
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: false,
-        text: 'aBcd',
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: 'aBcd',
+        },
+      ]);
   });
 
   test('should match diacritics sensitive', () => {
@@ -91,12 +95,13 @@ describe('highlightChunks', () => {
       diacriticsSensitive: true,
     });
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: false,
-        text: 'aBocd',
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: 'aBocd',
+        },
+      ]);
   });
 
   test('should match diacritics insensitive', () => {
@@ -108,29 +113,32 @@ describe('highlightChunks', () => {
       diacriticsSensitive: false,
     });
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: true,
-        text: 'aBoc',
-        highlightIndex: 0,
-      },
-      {
-        isHighlighted: false,
-        text: 'd',
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: true,
+          text: 'aBoc',
+          highlightIndex: 0,
+        },
+        {
+          isHighlighted: false,
+          text: 'd',
+        },
+      ]);
   });
 
   test('should accept string as queries', () => {
     const text = 'aBcd';
     const object = { test: 'abc' };
 
-    expect(() => highlightChunks(text, object)).toThrow('queries must be');
+    expect(() => highlightChunks(text, object))
+      .toThrow('queries must be');
 
     const currEnv = process.env.NODE_ENV;
     process.env.NODE_ENV = 'production';
 
-    expect(highlightChunks(text, object)).toEqual([]);
+    expect(highlightChunks(text, object))
+      .toEqual([]);
 
     process.env.NODE_ENV = currEnv;
   });
@@ -141,29 +149,29 @@ describe('highlightChunks', () => {
 
     const chunks = highlightChunks(text, queries);
 
-    expect(chunks).toEqual([
-      {
-        isHighlighted: true,
-        text: 'abbcdeAbc',
-        highlightIndex: 0,
-      },
-      {
-        isHighlighted: false,
-        text: 'd ',
-      },
-      {
-        isHighlighted: true,
-        text: 'abbc',
-        highlightIndex: 1,
-      },
-    ]);
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: true,
+          text: 'abbcdeAbc',
+          highlightIndex: 0,
+        },
+        {
+          isHighlighted: false,
+          text: 'd ',
+        },
+        {
+          isHighlighted: true,
+          text: 'abbc',
+          highlightIndex: 1,
+        },
+      ]);
   });
+
   test('should match whole word not part of other word', () => {
     const text = 'example amp';
     const string = 'amp';
-
     const chunks = highlightChunks(text, string, { wholeWordMatch: true });
-    console.log(chunks);
     expect(chunks)
       .toEqual([
         {
@@ -173,6 +181,42 @@ describe('highlightChunks', () => {
         {
           isHighlighted: true,
           text: 'amp',
+          highlightIndex: 0,
+        },
+      ]);
+  });
+
+  test('should match whole word not part of other word or digit', () => {
+    const text = 'corona2012 corona';
+    const string = 'corona';
+    const chunks = highlightChunks(text, string, { wholeWordMatch: true });
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: 'corona2012 ',
+        },
+        {
+          isHighlighted: true,
+          text: 'corona',
+          highlightIndex: 0,
+        },
+      ]);
+  });
+
+  test('should match whole number not part of other number', () => {
+    const text = '2012 01';
+    const string = '01';
+    const chunks = highlightChunks(text, string, { wholeWordMatch: true });
+    expect(chunks)
+      .toEqual([
+        {
+          isHighlighted: false,
+          text: '2012 ',
+        },
+        {
+          isHighlighted: true,
+          text: '01',
           highlightIndex: 0,
         },
       ]);
