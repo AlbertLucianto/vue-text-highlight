@@ -1,5 +1,4 @@
 import cloneRegexp from 'clone-regexp';
-import diacritics from 'diacritics';
 
 
 const isDigit = char => /^\d+$/.test(char);
@@ -40,8 +39,8 @@ export default function indicesOf(
   }
 
   if (!diacriticsSensitive) {
-    strCpy = diacritics.remove(strCpy);
-    searchStringCpy = diacritics.remove(searchStringCpy);
+    strCpy = strCpy.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    searchStringCpy = searchStringCpy.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 
   let startIndex = 0;

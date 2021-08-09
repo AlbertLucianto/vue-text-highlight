@@ -36,8 +36,7 @@
     "highlighter"
   ],
   "dependencies": {
-    "clone-regexp": "^2.1.0",
-    "diacritics": "^1.3.0"
+    "clone-regexp": "^2.1.0"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.29",
