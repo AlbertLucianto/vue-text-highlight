@@ -1,8 +1,8 @@
 {
-  "name": "vue-text-highlight",
-  "version": "2.0.10",
+  "name": "vue-text-highlight-international",
+  "version": "1.0.0",
   "description": "Text highlighter for Vue.js",
-  "author": "Albert Lucianto <albertlucianto@gmail.com>",
+  "author": "Petros Katsaras <katsaraspetros@gmail.com>",
   "main": "dist/vue-text-highlight.umd.js",
   "module": "dist/vue-text-highlight.esm.js",
   "unpkg": "dist/vue-text-highlight.min.js",
@@ -23,17 +23,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlbertLucianto/vue-text-highlight.git"
+    "url": "git+https://github.com/p-kat/vue-text-highlight-international.git"
   },
   "bugs": {
-    "url": "https://github.com/AlbertLucianto/vue-text-highlight/issues"
+    "url": "https://github.com/p-kat/vue-text-highlight-international/issues"
   },
-  "homepage": "https://github.com/AlbertLucianto/vue-text-highlight",
+  "homepage": "https://github.com/p-kat/vue-text-highlight-international",
   "keywords": [
     "vue",
     "text",
     "highlight",
-    "highlighter"
+    "highlighter",
+	"international"
   ],
   "dependencies": {
     "clone-regexp": "^2.1.0"
